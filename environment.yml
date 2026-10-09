@@ -64,8 +64,12 @@ dependencies:
 
   # ── Build tools (needed for madmom compilation) ───────────────────────────
   - cython>=0.29.0
+  - cmake>=3.20
+  - ninja
   - setuptools>=69.0,<81
   - wheel
+  - rust>=1.88,<2
+  - patchelf
 
   # ── Hardware / embedded dev tools (laptop only) ───────────────────────────
   - pyserial
@@ -112,5 +116,8 @@ dependencies:
       - "uvicorn>=0.23.0"
       - "gradio>=4.0.0"
 
-      # mir-core itself — installed editable from workspace
-      - "-e ../mir-core"
+      # mir-core plus the native desktop inference/export runtime
+      - "-e ../mir-core[native]"
+
+      # Rust/PyO3 frontend and stateful ONNX host used by mir-desktop-app
+      - "-e ../mir-desktop-app/native-runtime"
